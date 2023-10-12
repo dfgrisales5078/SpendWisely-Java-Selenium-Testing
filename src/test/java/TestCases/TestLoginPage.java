@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class TestCasesLoginPage{
+public class TestLoginPage {
     public WebDriver driver;
 
     @BeforeClass
@@ -28,34 +28,45 @@ public class TestCasesLoginPage{
     }
 
     @Test (priority = 1)
-    public void RegisterLink() throws InterruptedException {
-        WebElement register_link = driver.findElement(By.xpath(
-                "//*[@id=\"root\"]/div/div/div/form/div[3]/p/a[1]"));
-
-        register_link.click();
+    public void CheckNavBarLinks() {
+        WebElement nav_register_link = driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/ul/li[2]/a"));
+        nav_register_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/register");
-        Thread.sleep(2000);
+
+        WebElement nav_forgot_password_link = driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/ul/li[3]/a"));
+        nav_forgot_password_link.click();
+        assert driver.getCurrentUrl().equals("http://www.localhost:3000/forgot-password");
+
+        WebElement nav_home_link = driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/ul/li[1]/a"));
+        nav_home_link.click();
+        assert driver.getCurrentUrl().equals("http://www.localhost:3000/");
     }
 
     @Test (priority = 2)
-    public void ForgotPasswordLink() throws InterruptedException {
+    public void CheckLoginPageLinks() {
+        WebElement register_link = driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/div/div/form/div[3]/p/a[1]"));
+        register_link.click();
+        assert driver.getCurrentUrl().equals("http://www.localhost:3000/register");
+
+        driver.get("http://www.localhost:3000");
         WebElement forgot_password_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/p/a[2]"));
-
         forgot_password_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/forgot-password");
-        Thread.sleep(2000);
     }
 
     @Test (priority = 3)
-    public void FailedLogin() throws InterruptedException {
+    public void FailedLogin() {
         WebElement name = driver.findElement(By.xpath(
                 "//*[@id=\"email\"]"));
         WebElement password = driver.findElement(By.xpath(
                 "//*[@id=\"password\"]"));
         WebElement login_button = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/button"));
-
 
         name.sendKeys("amplify@email.com");
         password.sendKeys("amp");
@@ -65,16 +76,22 @@ public class TestCasesLoginPage{
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/div"));
         WebElement close_message = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/div/button"));
-
         assert invalid_credentials_message.isDisplayed();
         close_message.click();
-        assert driver.getCurrentUrl().equals("http://www.localhost:3000/");
-        Thread.sleep(2000);
-        // TODO - assert !invalid_credentials_message.isDisplayed();
+        Assert.assertFalse(isElementPresent(By.xpath("//*[@id=\"root\"]/div/div/div/form/div[3]/div")));
+    }
+
+    private boolean isElementPresent(By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
     }
 
     @Test (priority = 4)
-    public void SuccessfulLogin() throws InterruptedException {
+    public void SuccessfulLogin() {
         WebElement name = driver.findElement(By.xpath("//*[@id=\"email\"]"));
         WebElement password = driver.findElement(By.xpath("//*[@id=\"password\"]"));
         WebElement login_button = driver.findElement(By.xpath(
@@ -84,7 +101,6 @@ public class TestCasesLoginPage{
         password.sendKeys("amplify");
         login_button.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/transactions");
-        Thread.sleep(2000);
     }
 
     @AfterClass
