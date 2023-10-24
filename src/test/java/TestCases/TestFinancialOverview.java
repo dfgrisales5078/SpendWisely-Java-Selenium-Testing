@@ -49,6 +49,23 @@ public class TestFinancialOverview {
         assert bar_graph.isDisplayed();
     }
 
+    @Test (priority = 2)
+    public void HomeLink() {
+        WebElement nav_home_link = driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/ul/li[1]/a"));
+        nav_home_link.click();
+        assert driver.getCurrentUrl().equals("http://www.localhost:3000/transactions");
+    }
+
+    @Test (priority = 3)
+    public void SignOutLink() {
+        WebElement sign_out_link = driver.findElement(By.xpath(
+                "//*[@id=\"root\"]/div/ul/li[3]/a"));
+        sign_out_link.click();
+        assert driver.getCurrentUrl().equals("http://www.localhost:3000/");
+    }
+
+
     @AfterClass
     public void CloseBrowser() {
         driver.quit();
