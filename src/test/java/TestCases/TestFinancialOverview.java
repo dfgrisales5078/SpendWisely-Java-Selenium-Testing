@@ -1,7 +1,6 @@
 package TestCases;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -10,9 +9,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
-import java.time.Duration;
 
 public class TestFinancialOverview {
     public WebDriver driver;
@@ -45,7 +41,6 @@ public class TestFinancialOverview {
     public void CheckBarGraphElement() {
         WebElement bar_graph = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div/canvas"));
-
         assert bar_graph.isDisplayed();
     }
 
