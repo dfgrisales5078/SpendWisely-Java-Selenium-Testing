@@ -1,13 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="SpendWiselyTests">
-       <test name = "LoginPage">
+        <test name = "LoginPage">
             <classes>
                <class name="TestCases.TestLoginPage"/>
             </classes>
-       </test>
-       <test name = "TransactionsPage">
+        </test>
+        <test name = "TransactionsPage">
            <classes>
                <class name="TestCases.TestTransactionsPage"/>
            </classes>
-    </test>
+        </test>
+        <test name = "FinancialOverviewPage">
+           <classes>
+               <class name="TestCases.TestFinancialOverview"/>
+           </classes>
+        </test>
 </suite>
