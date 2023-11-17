@@ -18,7 +18,7 @@ public class TestFinancialOverview {
     public WebDriver driver;
 
     @BeforeClass
-    public void testSetup() {
+    public void testSetup() throws InterruptedException {
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
@@ -33,6 +33,7 @@ public class TestFinancialOverview {
 
         name.sendKeys("amplify@email.com");
         password.sendKeys("amplify");
+        Thread.sleep(1000);
         login_button.click();
     }
 
@@ -43,28 +44,31 @@ public class TestFinancialOverview {
 
     @Test (priority = 1)
 
-    public void CheckBarGraphElement() {
+    public void CheckBarGraphElement() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement barGraph = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@id=\"root\"]/div/div/div/div/div/canvas")));
 
         assert barGraph.isDisplayed();
+        Thread.sleep(1000);
     }
 
     @Test (priority = 2)
-    public void HomeLink() {
+    public void HomeLink() throws InterruptedException {
         WebElement nav_home_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[1]/a"));
         nav_home_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/transactions");
+        Thread.sleep(1000);
     }
 
     @Test (priority = 3)
-    public void SignOutLink() {
+    public void SignOutLink() throws InterruptedException {
         WebElement sign_out_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[3]/a"));
         sign_out_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/");
+        Thread.sleep(1000);
     }
 
 

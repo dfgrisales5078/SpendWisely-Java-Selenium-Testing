@@ -28,39 +28,44 @@ public class TestLoginPage {
     }
 
     @Test (priority = 1)
-    public void CheckNavBarLinks() {
+    public void CheckNavBarLinks() throws InterruptedException {
         WebElement nav_register_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[2]/a"));
         nav_register_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/register");
+        Thread.sleep(1000);
 
         WebElement nav_forgot_password_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[3]/a"));
         nav_forgot_password_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/forgot-password");
+        Thread.sleep(1000);
 
         WebElement nav_home_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[1]/a"));
         nav_home_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/");
+        Thread.sleep(1000);
     }
 
     @Test (priority = 2)
-    public void CheckLoginPageLinks() {
+    public void CheckLoginPageLinks() throws InterruptedException {
         WebElement register_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/p/a[1]"));
         register_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/register");
+        Thread.sleep(1000);
 
         driver.get("http://www.localhost:3000");
         WebElement forgot_password_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/p/a[2]"));
         forgot_password_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/forgot-password");
+        Thread.sleep(1000);
     }
 
     @Test (priority = 3)
-    public void FailedLogin() {
+    public void FailedLogin() throws InterruptedException {
         WebElement name = driver.findElement(By.xpath(
                 "//*[@id=\"email\"]"));
         WebElement password = driver.findElement(By.xpath(
@@ -71,6 +76,7 @@ public class TestLoginPage {
         name.sendKeys("amplify@email.com");
         password.sendKeys("amp");
         login_button.click();
+        Thread.sleep(1000);
 
         WebElement invalid_credentials_message = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/form/div[3]/div"));
@@ -79,6 +85,7 @@ public class TestLoginPage {
         assert invalid_credentials_message.isDisplayed();
         close_message.click();
         Assert.assertFalse(isElementPresent(By.xpath("//*[@id=\"root\"]/div/div/div/form/div[3]/div")));
+        Thread.sleep(1000);
     }
 
     private boolean isElementPresent(By locator) {
@@ -91,7 +98,7 @@ public class TestLoginPage {
     }
 
     @Test (priority = 4)
-    public void SuccessfulLogin() {
+    public void SuccessfulLogin() throws InterruptedException {
         WebElement name = driver.findElement(By.xpath("//*[@id=\"email\"]"));
         WebElement password = driver.findElement(By.xpath("//*[@id=\"password\"]"));
         WebElement login_button = driver.findElement(By.xpath(
@@ -99,8 +106,10 @@ public class TestLoginPage {
 
         name.sendKeys("amplify@email.com");
         password.sendKeys("amplify");
+        Thread.sleep(1000);
         login_button.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/transactions");
+        Thread.sleep(1000);
     }
 
     @AfterClass

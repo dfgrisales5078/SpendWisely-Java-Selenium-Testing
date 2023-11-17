@@ -43,69 +43,83 @@ public class TestTransactionsPage{
     }
 
     @Test (priority = 1)
-    public void FinancialOverviewLink() {
+    public void FinancialOverviewLink() throws InterruptedException {
         WebElement financial_overview_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[2]/a"));
         financial_overview_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/financial-overview");
+        Thread.sleep(1000);
     }
 
     @Test (priority = 2)
-    public void HomeLink() {
+    public void HomeLink() throws InterruptedException {
         WebElement nav_home_link = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/ul/li[1]/a"));
         nav_home_link.click();
         assert driver.getCurrentUrl().equals("http://www.localhost:3000/transactions");
+        Thread.sleep(1000);
     }
 
     @Test (priority = 3)
-    public void AddIncomeTransaction() {
+    public void AddIncomeTransaction() throws InterruptedException {
         WebElement transaction_type_dropdown = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/select[1]"));
         transaction_type_dropdown.click();
+        Thread.sleep(1000);
         Select transaction_type_select = new Select(transaction_type_dropdown);
         transaction_type_select.selectByVisibleText("Income");
+        Thread.sleep(1000);
 
         WebElement transaction_category_dropdown = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/select[2]"));
         transaction_category_dropdown.click();
+        Thread.sleep(1000);
 
         Select transaction_category_select = new Select(transaction_category_dropdown);
         transaction_category_select.selectByVisibleText("Salary");
+        Thread.sleep(1000);
 
         WebElement transaction_amount = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/input"));
         float random_amount = (float) (Math.random() * 900 + 100);
         transaction_amount.sendKeys(Float.toString(random_amount));
+        Thread.sleep(1000);
 
         WebElement add_income_transaction_button = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/div/button"));
         add_income_transaction_button.click();
+        Thread.sleep(1000);
     }
 
     @Test (priority = 4)
-    public void AddExpenseTransaction() {
+    public void AddExpenseTransaction() throws InterruptedException {
         WebElement transaction_type_dropdown = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/select[1]"));
         transaction_type_dropdown.click();
+        Thread.sleep(1000);
         Select transaction_type_select = new Select(transaction_type_dropdown);
         transaction_type_select.selectByVisibleText("Expense");
+        Thread.sleep(1000);
 
         WebElement transaction_category_dropdown = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/select[2]"));
         transaction_category_dropdown.click();
+        Thread.sleep(1000);
 
         Select transaction_category_select = new Select(transaction_category_dropdown);
         transaction_category_select.selectByVisibleText("Education");
+        Thread.sleep(1000);
 
         WebElement transaction_amount = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/input"));
         float random_amount = (float) (Math.random() * 900 + 100);
         transaction_amount.sendKeys(Float.toString(random_amount));
+        Thread.sleep(1000);
 
         WebElement add_income_transaction_button = driver.findElement(By.xpath(
                 "//*[@id=\"root\"]/div/div/div/div/div[2]/form/div/button"));
         add_income_transaction_button.click();
+        Thread.sleep(1000);
     }
 
     @Test (priority = 5)
