@@ -1,6 +1,8 @@
 package TestCases;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -9,6 +11,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.time.Duration;
 
 public class TestFinancialOverview {
     public WebDriver driver;
@@ -38,10 +42,13 @@ public class TestFinancialOverview {
     }
 
     @Test (priority = 1)
+
     public void CheckBarGraphElement() {
-        WebElement bar_graph = driver.findElement(By.xpath(
-                "//*[@id=\"root\"]/div/div/div/div/div/canvas"));
-        assert bar_graph.isDisplayed();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement barGraph = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@id=\"root\"]/div/div/div/div/div/canvas")));
+
+        assert barGraph.isDisplayed();
     }
 
     @Test (priority = 2)
