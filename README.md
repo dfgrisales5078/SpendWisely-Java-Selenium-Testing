@@ -1,5 +1,6 @@
 # SpendWisely UI Testing demo:
-https://github.com/dfgrisales5078/SpendWisely-Java-Selenium-Testing/assets/54412831/871a7de4-aba8-4900-9899-75aec3634b55
+https://github.com/dfgrisales5078/SpendWisely-Java-Selenium-Testing/assets/54412831/995d4018-4785-4db9-bf1b-7e11abf027ce
+
 
 
 ### Frontend Tech Stack:
